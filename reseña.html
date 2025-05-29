@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reseñas - TechSecure</title>
+    <style>
+               @keyframes fadeSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e0f7f9, #f3e8ff);
+            color: #333;
+            overflow: hidden; /* Evita scroll durante la intro */
+        }
+
+        header {
+            background-color: #00bcd4;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 26px;
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .ojito {
+            position: fixed;
+            top: 5px;
+            right: 10px;
+            font-size: 14px;
+            color: white;
+            z-index: 1100;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .reseñas {
+            margin-bottom: 50px;
+        }
+
+        .reseña {
+            background-color: #ffffff;
+            border-left: 6px solid #9c27b0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .reseña p {
+            font-size: 16px;
+            color: #4a4a4a;
+        }
+
+        .reseña span {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #9c27b0;
+        }
+
+        .formulario-reseña {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            border-left: 6px solid #00bcd4;
+            margin-bottom: 50px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 2px solid #b2ebf2;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #00bcd4;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0097a7;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #b2fefa;
+            color: #444;
+            padding: 15px 0;
+            margin-top: 50px;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-link a {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #00bcd4;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            background-color: #0097a7;
+        }
+
+        /* Estilos para intro video */
+        #video-intro-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #video-intro-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #video-intro-container button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body onload="contarVisitas()">
+
+<!-- INTRO VIDEO PANTALLA COMPLETA -->
+<div id="video-intro-container">
+    <video id="intro-video" autoplay muted>
+        <source src="intro_full.mp4" type="video/mp4">
+        Tu navegador no soporta el video.
+    </video>
+    <button onclick="saltarIntro()">Saltar intro</button>
+</div>
+
+<!-- Contador 👁️ -->
+<div class="ojito">
+    👁️ Vistas: <span id="contador">0</span>
+</div>
+
+<!-- Navegación -->
+<header>
+    <h1>Reseñas</h1>
+    <div class="nav-links">
+        <a href="paginadeinicio.html">Inicio</a>
+        <a href="valores.html">Misión y Visión</a>
+        <a href="prototipo.html">Ver prototipo</a>
+        <a href="pedido.html">Pedidos</a>
+        <a href="reseña.html">Reseñas</a>
+        <a href="politica_privacidad.html">Privacidad</a>
+    </div>
+</header>
+
+<!-- VIDEO PEQUEÑO ANIMADO -->
+<div class="video-container">
+    <video width="280" autoplay loop muted style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        <source src="video_intro.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+    </video>
+</div>
+
+<!-- CONTENIDO -->
+<div class="container">
+
+    <!-- Reseñas existentes -->
+    <section class="reseñas" id="lista-reseñas">
+        <div class="reseña">
+            <p>La incorporación de este prototipo de puerta automática marcó un antes y un después en el desarrollo de nuestros proyectos dentro del área de Mecatrónica. Su diseño funcional, basado en sensores y controladores, no solo enriqueció el aprendizaje teórico, sino que brindó a los estudiantes una valiosa experiencia práctica, donde pudieron aplicar conceptos de electrónica, programación y diseño estructural en un contexto real. Esta herramienta tecnológica permitió comprender el funcionamiento de sistemas automatizados de acceso, promoviendo el análisis, la resolución de problemas y la creatividad. Sin duda, ha sido una aportación innovadora que elevó el nivel de nuestros trabajos escolares, acercándonos más al estándar profesional en el campo de la ingeniería.</p>
+            <span>- Profe Ricardo</span>
+        </div>
+
+        <div class="reseña">
+            <p>Como persona con movilidad reducida, siempre he enfrentado dificultades al abrir puertas convencionales, especialmente en espacios públicos. Desde que se implementó esta puerta automática, mi experiencia diaria ha cambiado por completo. Ahora puedo entrar y salir de aulas y oficinas sin necesidad de pedir ayuda, lo que me brinda una mayor independencia y dignidad. Es práctica, segura y responde de forma rápida y eficiente al movimiento. Este tipo de tecnología no solo mejora la accesibilidad, sino que también representa un paso hacia una verdadera inclusión. Ojalá más instituciones adopten soluciones como esta.</p>
+            <span>- Alexis Ladino</span>
+        </div>
+    </section>
+
+    <!-- Formulario para nueva reseña -->
+    <section class="formulario-reseña">
+        <h2>Publicar nueva reseña</h2>
+        <form id="formReseña">
+            <input type="text" id="autor" placeholder="Tu nombre" required>
+            <textarea id="comentario" rows="4" placeholder="Escribe tu reseña aquí..." required></textarea>
+            <button type="submit">Publicar reseña</button>
+        </form>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Phat To The Future - Todos los derechos reservados
+</footer>
+
+<!-- Botón volver -->
+<div class="back-link">
+    <a href="paginadeinicio.html">Volver al Inicio</a>
+</div>
+
+<!-- Scripts -->
+<script>
+    // Contador de visitas
+    function contarVisitas() {
+        let visitas = localStorage.getItem("contadorVisitasResenas") || 0;
+        visitas++;
+        localStorage.setItem("contadorVisitasResenas", visitas);
+        document.getElementById("contador").textContent = visitas;
+    }
+
+    // Publicar reseña
+    document.getElementById("formReseña").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const autor = document.getElementById("autor").value.trim();
+        const comentario = document.getElementById("comentario").value.trim();
+
+        if (autor && comentario) {
+            const nuevaReseña = document.createElement("div");
+            nuevaReseña.classList.add("reseña");
+            nuevaReseña.innerHTML = `<p>${comentario}</p><span>- ${autor}</span>`;
+            document.getElementById("lista-reseñas").appendChild(nuevaReseña);
+            document.getElementById("formReseña").reset();
+        }
+    });
+
+    // Reproducción de video intro
+    const videoIntro = document.getElementById("intro-video");
+    const contenedorIntro = document.getElementById("video-intro-container");
+
+    function saltarIntro() {
+        contenedorIntro.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    videoIntro.addEventListener("ended", saltarIntro);
+
+    // Por si falla la carga
+    setTimeout(() => {
+        if (contenedorIntro.style.display !== "none") {
+            saltarIntro();
+        }
+    }, 10000);
+</script>
+<!-- Música de fondo con controles personalizados -->
+<div id="musica-control" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0,188,212,0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+">
+    <span>🎵 Música</span>
+    <button onclick="toggleMusica()" id="btnMusica" style="
+        background-color: white;
+        color: #00bcd4;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    ">⏸️</button>
+</div>
+
+<audio id="musicaFondo" loop autoplay>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+</audio>
+
+<script>
+    const musica = document.getElementById("musicaFondo");
+    const botonMusica = document.getElementById("btnMusica");
+
+    function toggleMusica() {
+        if (musica.paused) {
+            musica.play();
+            botonMusica.textContent = "⏸️"; // icono de pausa
+        } else {
+            musica.pause();
+            botonMusica.textContent = "▶️"; // icono de play
+        }
+    }
+
+    // Autoplay fix para navegadores que bloquean reproducción automática
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("click", () => {
+            if (musica.paused) {
+                musica.play().catch(() => {});
+            }
+        }, { once: true });
+    });
+</script>
+
+</body>
+</html>

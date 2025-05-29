@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Misión, Visión y Valores - Path To The Future</title>
+  <style>
+    body {
+      background-color: #e6f7ff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Intro Video */
+    #intro-video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #intro-video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #skip-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: rgba(255,255,255,0.8);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    header {
+      background-color: #003366;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+    }
+
+    .ojito {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 22px;
+      color: white;
+    }
+
+    nav {
+      background-color: #0059b3;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      background-color: #003366;
+      padding: 10px 20px;
+      margin: 5px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #001f4d;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #003366;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #0059b3;
+      margin-top: 20px;
+    }
+
+    p, li {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    footer {
+      background-color: #ffffff;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Video -->
+  <div id="intro-video-container">
+    <video autoplay muted playsinline id="intro-video">
+      <source src="intro_full.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+    <button id="skip-button">Saltar intro</button>
+  </div>
+
+  <header>
+    <span class="ojito">👁</span>
+    <h1>Misión, Visión y Valores</h1>
+  </header>
+
+  <nav>
+    <a href="paginadeinicio.html">Inicio</a>
+    <a href="reseña.html">Reseñas</a>
+    <a href="prototipo.html">Ver Prototipo</a>
+    <a href="pedido.html">Pedidos</a>
+    <a href="politica_privacidad.html">Política de Privacidad</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <div class="container">
+    <h2>Misión</h2>
+    <p>Diseñar, fabricar e instalar puertas automáticas de alta tecnología que proporcionen seguridad, confort y eficiencia a hogares, empresas e instituciones. Nos comprometemos a utilizar materiales de primera calidad y brindar un servicio personalizado que no solo satisfaga, sino que supere las expectativas de nuestros clientes.</p>
+
+    <h2>Visión</h2>
+    <p>Consolidarnos como la empresa líder en Latinoamérica en soluciones de acceso automatizado, reconocida por su constante innovación, altos estándares de seguridad y excelencia en diseño, contribuyendo al desarrollo de espacios modernos, eficientes y funcionales.</p>
+
+    <h2>Valores</h2>
+    <ul>
+      <li><strong>Innovación:</strong> Desarrollamos soluciones de vanguardia con tecnología de última generación.</li>
+      <li><strong>Seguridad:</strong> Priorizamos la protección y tranquilidad de nuestros usuarios en cada proyecto.</li>
+      <li><strong>Calidad:</strong> Utilizamos materiales duraderos y procesos certificados para garantizar resultados superiores.</li>
+      <li><strong>Responsabilidad:</strong> Actuamos con ética, compromiso social y respeto por el medio ambiente.</li>
+      <li><strong>Atención al cliente:</strong> Ofrecemos un servicio cercano, eficiente y adaptado a las necesidades reales de cada cliente.</li>
+      <li><strong>Trabajo en equipo:</strong> Fomentamos la colaboración, el respeto mutuo y la sinergia para lograr objetivos comunes.</li>
+      <li><strong>Adaptabilidad:</strong> Nos ajustamos con flexibilidad a las particularidades y presupuestos de cada proyecto.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Path To The Future. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Intro video control
+    const introVideo = document.getElementById("intro-video");
+    const introContainer = document.getElementById("intro-video-container");
+    const skipButton = document.getElementById("skip-button");
+
+    introVideo.addEventListener("ended", () => {
+      introContainer.style.display = "none";
+    });
+
+    skipButton.addEventListener("click", () => {
+      introVideo.pause();
+      introContainer.style.display = "none";
+    });
+  </script>
+<!-- Música de fondo con controles personalizados -->
+<div id="musica-control" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0,188,212,0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+">
+    <span>🎵 Música</span>
+    <button onclick="toggleMusica()" id="btnMusica" style="
+        background-color: white;
+        color: #00bcd4;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    ">⏸️</button>
+</div>
+
+<audio id="musicaFondo" loop autoplay>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+</audio>
+
+<script>
+    const musica = document.getElementById("musicaFondo");
+    const botonMusica = document.getElementById("btnMusica");
+
+    function toggleMusica() {
+        if (musica.paused) {
+            musica.play();
+            botonMusica.textContent = "⏸️"; // icono de pausa
+        } else {
+            musica.pause();
+            botonMusica.textContent = "▶️"; // icono de play
+        }
+    }
+
+    // Autoplay fix para navegadores que bloquean reproducción automática
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("click", () => {
+            if (musica.paused) {
+                musica.play().catch(() => {});
+            }
+        }, { once: true });
+    });
+</script>
+</body>
+</html>

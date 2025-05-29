@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Protótipo de Puerta Automática</title>
+  <style>
+    /* Intro */
+    #intro-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #intro-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #intro-container button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 18px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    body.intro-active {
+      overflow: hidden;
+    }
+
+    /* Contenido principal */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #97CBFF;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-links a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .contador {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    h1 {
+      color: #003366;
+      margin: 10px 0 5px;
+      text-align: center;
+    }
+
+    section {
+      padding: 20px 40px;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      margin: 5px 0 15px;
+      padding-left: 20px;
+    }
+
+    footer {
+      background-color: #f2f2f2;
+      padding: 15px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .media-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    video, img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-link {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: white;
+      background-color: #005b96;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-link a:hover {
+      background-color: #003f6b;
+    }
+
+    table {
+      width: 100%;
+      max-width: 700px;
+      margin: 10px auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #666;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #003366;
+      color: white;
+    }
+
+    .ojito {
+      position: fixed;
+      top: 5px;
+      right: 10px;
+      font-size: 14px;
+      color: white;
+      z-index: 1100;
+    }
+  </style>
+</head>
+
+<body class="intro-active" onload="contarVisitas()">
+
+  <!-- Intro en video -->
+  <div id="intro-container">
+    <video id="intro-video" autoplay muted>
+      <source src="intro_full.mp4" type="video/mp4">
+      Tu navegador no soporta video.
+    </video>
+    <button onclick="saltarIntro()">Saltar Intro</button>
+  </div>
+
+  <!-- Contador tipo ojito 👁️ -->
+  <div class="ojito">
+    👁️ Vistas: <span id="contador">0</span>
+  </div>
+
+  <!-- Navegación superior -->
+  <div id="contenido" style="display: none;">
+    <header>
+      <div class="nav-links">
+        <a href="paginadeinicio.html">Inicio</a>
+        <a href="valores.html">Visión, Misión y Valores</a>
+        <a href="pedido.html">Pedidos</a>
+        <a href="reseña.html">Reseñas</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="politica_privacidad.html">Política de Privacidad</a>
+      </div>
+    </header>
+
+    <h1>Prototipo de Puerta Automática</h1>
+
+    <div class="media-container">
+      <video controls>
+        <source src="video.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+      </video>
+      <img src="puerta.jpg" alt="Imagen del prototipo de puerta automática">
+    </div>
+
+    <section id="prototipo">
+      <h2>Descripción del Producto</h2>
+      <ul>
+        <li>Funciona con sensor de movimiento</li>
+        <li>Controlado por un microcontrolador (como Arduino)</li>
+        <li>Estructura de madera o acrílico</li>
+        <li>Mecanismo de apertura con servomotor o motorreductor</li>
+        <li>Alimentación por batería o fuente de corriente continua</li>
+      </ul>
+
+      <h3>Especificaciones Técnicas</h3>
+      <ul>
+        <li>Sensor ultrasónico HC-SR04</li>
+        <li>Microcontrolador Arduino UNO</li>
+        <li>Servo SG90 / Motor DC</li>
+        <li>Fuente de alimentación de 5V o 9V</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Beneficios del Prototipo</h2>
+      <ul>
+        <li>Mejora la seguridad al evitar contacto físico</li>
+        <li>Ahorro de energía mediante automatización</li>
+        <li>Bajo costo de implementación</li>
+        <li>Ideal para escuelas, oficinas y hogares</li>
+        <li>Fomenta el aprendizaje práctico de electrónica y programación</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Aplicaciones</h2>
+      <ul>
+        <li>Escuelas, oficinas, hogares</li>
+        <li>Hospitales, clínicas y consultorios</li>
+        <li>Centros comerciales y bancos</li>
+        <li>Hoteles, garajes y aeropuertos</li>
+        <li>Museos, universidades y más</li>
+      </ul>
+    </section>
+
+    <section id="costos">
+      <h2>Cotización (El precio puede variar dependiedo del proyecto)</h2>
+      <table>
+        <tr><th>Componente</th><th>Costo Aprox. (MXN)</th></tr>
+        <tr><td>Sensor ultrasónico</td><td>$400</td></tr>
+        <tr><td>Arduino UNO</td><td>$1500</td></tr>
+        <tr><td>Servo motor o motor DC</td><td>$800</td></tr>
+        <tr><td>Fuente de alimentación</td><td>$600</td></tr>
+        <tr><td>Material de estructura</td><td>$10000</td></tr>
+        <tr><td>Cables, protoboard, tornillos</td><td>$700</td></tr>
+        <tr><td><strong>Total estimado</strong></td><td><strong>$14000</strong></td></tr>
+      </table>
+    </section>
+
+    <div class="back-link">
+      <a href="paginadeinicio.html">Volver al Inicio</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Path To The Future. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <script>
+    function contarVisitas() {
+      let visitas = localStorage.getItem("contadorVisitas") || 0;
+      visitas++;
+      localStorage.setItem("contadorVisitas", visitas);
+      document.getElementById("contador").textContent = visitas;
+    }
+
+    function saltarIntro() {
+      document.getElementById("intro-container").style.display = "none";
+      document.getElementById("contenido").style.display = "block";
+      document.body.classList.remove("intro-active");
+    }
+
+    // Ocultar intro al terminar video o después de 10 segundos
+    const video = document.getElementById("intro-video");
+    video.addEventListener("ended", saltarIntro);
+    setTimeout(() => {
+      if (document.body.classList.contains("intro-active")) {
+        saltarIntro();
+      }
+    }, 10000);
+  </script>
+<!-- Música de fondo con controles personalizados -->
+<div id="musica-control" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0,188,212,0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+">
+    <span>🎵 Música</span>
+    <button onclick="toggleMusica()" id="btnMusica" style="
+        background-color: white;
+        color: #00bcd4;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    ">⏸️</button>
+</div>
+
+<audio id="musicaFondo" loop autoplay>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+</audio>
+
+<script>
+    const musica = document.getElementById("musicaFondo");
+    const botonMusica = document.getElementById("btnMusica");
+
+    function toggleMusica() {
+        if (musica.paused) {
+            musica.play();
+            botonMusica.textContent = "⏸️"; // icono de pausa
+        } else {
+            musica.pause();
+            botonMusica.textContent = "▶️"; // icono de play
+        }
+    }
+
+    // Autoplay fix para navegadores que bloquean reproducción automática
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("click", () => {
+            if (musica.paused) {
+                musica.play().catch(() => {});
+            }
+        }, { once: true });
+    });
+</script>
+
+</body>
+</html>

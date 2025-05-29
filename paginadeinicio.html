@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Path To The Future</title>
+    <style>
+        /* Estilos de intro */
+        #video-intro-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #video-intro-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #video-intro-container button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        body.intro-active {
+            overflow: hidden;
+        }
+
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #d0e7ff;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .top-bar {
+            background-color: #0a3d62;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .top-bar a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 12px 20px;
+            background-color: #1e3799;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .top-bar a:hover {
+            background-color: #4a69bd;
+            transform: scale(1.05);
+        }
+
+        .logo-container {
+            margin: 30px auto 10px;
+        }
+
+        .logo-container img {
+            width: 180px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .empresa-nombre {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #0a3d62;
+        }
+
+        .eslogan {
+            font-style: italic;
+            color: #3b3b3b;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            background-color: #0a3d62;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .contador {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contador span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="intro-active">
+
+    <!-- INTRO VIDEO -->
+    <div id="video-intro-container">
+        <video id="intro-video" autoplay muted>
+            <source src="intro_full.mp4" type="video/mp4">
+            Tu navegador no soporta el video.
+        </video>
+        <button onclick="saltarIntro()">Saltar intro</button>
+    </div>
+
+    <!-- CONTENIDO REAL DE LA PÁGINA -->
+    <div id="contenido" style="display: none;">
+        <div class="top-bar">
+            <div class="contador">
+                👁️ <span id="visitas">0</span>
+            </div>
+            <a href="prototipo.html">Ver Prototipo</a>
+            <a href="reseña.html">Reseñas</a>
+            <a href="politica_privacidad.html">Política de Privacidad</a>
+            <a href="valores.html">Visión, Misión y Valores</a>
+            <a href="pedido.html">Pedidos</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Logo de la empresa">
+        </div>
+        <div class="empresa-nombre">Path To The Future</div>
+        <div class="eslogan">"Puertas que se abren hacia nuevas posibilidades"</div>
+
+        <footer>
+            <p>Path To The Future &copy; 2025 - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        // Mostrar visitas
+        window.onload = function () {
+            if (localStorage.pageViews) {
+                localStorage.pageViews = Number(localStorage.pageViews) + 1;
+            } else {
+                localStorage.pageViews = 1;
+            }
+            document.getElementById("visitas").innerText = localStorage.pageViews;
+        };
+
+        // Intro
+        const videoIntro = document.getElementById("intro-video");
+        const contenedorIntro = document.getElementById("video-intro-container");
+        const contenido = document.getElementById("contenido");
+
+        function saltarIntro() {
+            contenedorIntro.style.display = "none";
+            contenido.style.display = "block";
+            document.body.classList.remove("intro-active");
+        }
+
+        videoIntro.addEventListener("ended", saltarIntro);
+
+        // Por si el video se traba o tarda mucho
+        setTimeout(() => {
+            if (contenedorIntro.style.display !== "none") {
+                saltarIntro();
+            }
+        }, 10000);
+    </script>
+<!-- Música de fondo con controles personalizados -->
+<div id="musica-control" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0,188,212,0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+">
+    <span>🎵 Música</span>
+    <button onclick="toggleMusica()" id="btnMusica" style="
+        background-color: white;
+        color: #00bcd4;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    ">⏸️</button>
+</div>
+
+<audio id="musicaFondo" loop autoplay>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+</audio>
+
+<script>
+    const musica = document.getElementById("musicaFondo");
+    const botonMusica = document.getElementById("btnMusica");
+
+    function toggleMusica() {
+        if (musica.paused) {
+            musica.play();
+            botonMusica.textContent = "⏸️"; // icono de pausa
+        } else {
+            musica.pause();
+            botonMusica.textContent = "▶️"; // icono de play
+        }
+    }
+
+    // Autoplay fix para navegadores que bloquean reproducción automática
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("click", () => {
+            if (musica.paused) {
+                musica.play().catch(() => {});
+            }
+        }, { once: true });
+    });
+</script>
+
+</body>
+</html>

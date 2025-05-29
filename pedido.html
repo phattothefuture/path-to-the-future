@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pedidos - Path To The Future</title>
+  <style>
+    /* Intro */
+    #intro-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #intro-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #intro-container button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 18px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    body.intro-active {
+      overflow: hidden;
+    }
+
+    body {
+      background-color: #e6f7ff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #003366;
+      padding: 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+    }
+
+    nav {
+      background-color: #0059b3;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      background-color: #003366;
+      padding: 10px 20px;
+      margin: 5px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #001f4d;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #001f4d;
+    }
+
+    .contador {
+      position: fixed;
+      top: 5px;
+      right: 10px;
+      font-size: 14px;
+      color: white;
+      z-index: 1100;
+    }
+
+    footer {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body class="intro-active" onload="contarVisitas()">
+
+  <!-- Intro en video -->
+  <div id="intro-container">
+    <video id="intro-video" autoplay muted>
+      <source src="intro_full.mp4" type="video/mp4">
+      Tu navegador no soporta video.
+    </video>
+    <button onclick="saltarIntro()">Saltar Intro</button>
+  </div>
+
+  <div id="contenido" style="display: none;">
+    <header>
+      <h1>Pedidos - Path To The Future</h1>
+    </header>
+
+    <nav>
+      <a href="paginadeinicio.html">Inicio</a> 
+      <a href="reseña.html">Reseñas</a>
+      <a href="verprototipo.html">Ver Prototipo</a>
+      <a href="politica_privacidad.html">Política de Privacidad</a>
+      <a href="valores.html">Misión, Visión y Valores</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <div class="contador">
+      👁️ <span id="visitas">0</span>
+    </div>
+
+    <div class="container">
+      <h2>Encargar una Puerta Automática</h2>
+      <form id="pedidoForm">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required />
+
+        <label for="direccion">Dirección de entrega:</label>
+        <input type="text" id="direccion" name="direccion" required />
+
+        <label for="tipo">Tipo de puerta:</label>
+        <select id="tipo" name="tipo" required>
+          <option value="">-- Selecciona una opción --</option>
+          <option value="corrediza">Corrediza</option>
+          <option value="abatible">Abatible</option>
+          <option value="plegable">Plegable</option>
+        </select>
+
+        <label for="material">Material deseado:</label>
+        <select id="material" name="material" required>
+          <option value="">-- Selecciona el material --</option>
+          <option value="aluminio">Aluminio</option>
+          <option value="acero">Acero inoxidable</option>
+          <option value="vidrio">Vidrio templado</option>
+          <option value="mixto">Mixto (varios materiales)</option>
+        </select>
+
+        <label for="comentarios">Comentarios adicionales:</label>
+        <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+
+        <button type="submit">Enviar pedido</button>
+      </form>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Path To The Future. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Contador de visitas local
+    function contarVisitas() {
+      let visitas = localStorage.getItem('contadorVisitas');
+      visitas = visitas ? parseInt(visitas) + 1 : 1;
+      localStorage.setItem('contadorVisitas', visitas);
+      document.getElementById('visitas').innerText = visitas;
+    }
+
+    // Formulario
+    document.getElementById('pedidoForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert("¡Gracias por tu pedido! Nos pondremos en contacto contigo pronto.");
+      this.reset();
+    });
+
+    // Ocultar intro
+    function saltarIntro() {
+      document.getElementById("intro-container").style.display = "none";
+      document.getElementById("contenido").style.display = "block";
+      document.body.classList.remove("intro-active");
+    }
+
+    // Auto-saltar intro al finalizar video o a los 10s
+    const video = document.getElementById("intro-video");
+    video.addEventListener("ended", saltarIntro);
+    setTimeout(() => {
+      if (document.body.classList.contains("intro-active")) {
+        saltarIntro();
+      }
+    }, 10000);
+  </script>
+<!-- Música de fondo con controles personalizados -->
+<div id="musica-control" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0,188,212,0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+">
+    <span>🎵 Música</span>
+    <button onclick="toggleMusica()" id="btnMusica" style="
+        background-color: white;
+        color: #00bcd4;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    ">⏸️</button>
+</div>
+
+<audio id="musicaFondo" loop autoplay>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+</audio>
+
+<script>
+    const musica = document.getElementById("musicaFondo");
+    const botonMusica = document.getElementById("btnMusica");
+
+    function toggleMusica() {
+        if (musica.paused) {
+            musica.play();
+            botonMusica.textContent = "⏸️"; // icono de pausa
+        } else {
+            musica.pause();
+            botonMusica.textContent = "▶️"; // icono de play
+        }
+    }
+
+    // Autoplay fix para navegadores que bloquean reproducción automática
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("click", () => {
+            if (musica.paused) {
+                musica.play().catch(() => {});
+            }
+        }, { once: true });
+    });
+</script>
+</body>
+</html>
